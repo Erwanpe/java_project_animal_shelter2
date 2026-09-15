@@ -1,0 +1,25 @@
+Required functions:
+	Loading and Validate function : 
+		what to load ? -> animals, volunteers, medical records from text files
+	
+	Registering and Updating function :
+		what to register/update ? -> animals, care data, volunteers tasks (reject duplic/ non formal records)
+	
+	Evaluating adoption eligibility + validate/reject adoption :
+		adoption requirements + verify 
+		
+	Search function with filters (type, age, arrival date, adoption status..) :
+		Be able to get specific elements from animals lists and display them to the user
+
+
+Objects/Class to create :
+	Abstract Animal Class : then specific Animal Class extending Animal;
+	Adoptable Interface : with all the conditions needed for a animal to be adoptable;
+	MedicalRecord Class : with specific medical status, to apply for every animal;
+	AdoptionApplication : Checking if the animal selected is adoptable corresponding to the requirements then validate or not the adoption;
+	Volunteer Class : Object defining a volunteer (skills, availability..);
+	CareTask Class : Object defining a task (assignements..);
+	Repository Class : List to store volunteers and animals;
+	AdoptionService : Validating and completing adoptions -> final check and validation (updating storage);
+	ShelterPopulation : For main operations
+		ShelterExceptions : All the custom exceptions for capacity, adoption, errors handling;
