@@ -27,4 +27,16 @@ public class MedicalRecord {
         return notes.add(note);
     }
 
+    public List<String> getTreatments() {
+        return new ArrayList<>(this.treatments);
+    }
+
+    public List<String> getNotes() {
+        return new ArrayList<>(this.notes);
+    }
+
+    public Set<String> getVaccinations() {
+        return new HashSet<>(this.vaccinations);
+    }
+
 }

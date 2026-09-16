@@ -10,7 +10,7 @@ public abstract class Animal implements Adoptable {
     private final int age;
     private final int arrivalDate;
     private AnimalStatus status;
-    private MedicalRecord medicalRecord;
+    private final MedicalRecord medicalRecord;
 
     public Animal(String id, String name, int age, int arrivalDate, AnimalStatus status) {
         if (id == null || id.isBlank()) {
@@ -24,6 +24,7 @@ public abstract class Animal implements Adoptable {
         this.age = age;
         this.arrivalDate = arrivalDate;
         this.status = status;
+        this.medicalRecord = new MedicalRecord();
     }
 
     public String getId() {
@@ -44,6 +45,10 @@ public abstract class Animal implements Adoptable {
 
     public AnimalStatus getStatus() {
         return status;
+    }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
     }
 
     protected void setStatus(AnimalStatus status) {
