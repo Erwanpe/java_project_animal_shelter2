@@ -9,7 +9,7 @@ public class doctor {
     private final String id_doctor;
     private final String name;
     private final String specialization;
-    private final List performedTreatments;
+    private final List<String> performedTreatments;
 
     public doctor(String id_doctor, String name, String specialization) {
         if (id_doctor == null || id_doctor.isBlank()) {
@@ -40,9 +40,7 @@ public class doctor {
         return specialization;
     }
 
-    /**
-     * Renvoie une vue non modifiable de l'historique des traitements (Encapsulation).
-     */
+   
     public List getPerformedTreatments() {
         return Collections.unmodifiableList(performedTreatments);
     }
