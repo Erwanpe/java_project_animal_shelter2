@@ -1,13 +1,15 @@
 package model;
 
+import java.util.Set;
+
 public class Volunteer {
     private int idVol;
     private String nameVol;
     private boolean availability;
-    private String skills;
+    private Set<String> skills;
     private VolunteerStatus assignmentStatus;
 
-    public Volunteer(int idVol, String nameVol, boolean availability, String skills, VolunteerStatus assignmentStatus){
+    public Volunteer(int idVol, String nameVol, boolean availability, Set<String> skills, VolunteerStatus assignmentStatus){
         this.idVol = idVol;
         this.nameVol = nameVol;
         this.availability = availability;
@@ -19,9 +21,13 @@ public class Volunteer {
 
     public String getNameVolunteer(){return nameVol;}
 
-    public boolean getAvailibility(){return availability;}
+    public boolean getAvailability(){return availability;}
 
-    public String getSkills(){return skills;}
+    public Set<String> getSkills(){return skills;}
 
-    public VolunteerStatus getAssignmenStatus(){return assignmentStatus;}
+    public VolunteerStatus getAssignmentStatus(){return assignmentStatus;}
+
+    protected void setAssignmentStatus(VolunteerStatus assignmentStatus) {
+        this.assignmentStatus = assignmentStatus;
+    }
 }
