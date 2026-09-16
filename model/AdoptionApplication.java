@@ -1,5 +1,7 @@
 package model;
 
+import exception.ShelterException;
+
 public class AdoptionApplication {
 
     private String id;
@@ -11,6 +13,12 @@ public class AdoptionApplication {
     private ApplicationStatus decision;
 
     public AdoptionApplication(String id, String applicantName, Animal animal) {
+        if (id == null || id.isBlank()) {
+            throw new ShelterException("Application id cannot be null or blank.");
+        }
+        if (animal == null) {
+            throw new ShelterException("Application must target an animal.");
+        }
         this.id = id;
         this.applicantName = applicantName;
         this.animal = animal;
