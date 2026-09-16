@@ -1,26 +1,30 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class MedicalRecord {
 
-    private boolean vaccinationUpToDate;
-    private boolean underTreatment;
-    private String notes;
+    private final List<String> notes = new ArrayList<>();
+    private final List<String> treatments = new ArrayList<>();
+    private final Set<String> vaccinations = new HashSet<>();
 
-    public MedicalRecord(boolean vaccinationUpToDate, boolean underTreatment, String notes) {
-        this.vaccinationUpToDate = vaccinationUpToDate;
-        this.underTreatment = underTreatment;
-        this.notes = notes ;
+    public boolean addVaccination(String vaccination) {
+        return vaccinations.add(vaccination);
     }
 
-    public boolean getIsVaccinationUpToDate() {
-        return vaccinationUpToDate;
+    public boolean hasVaccination(String vaccination) {
+        return vaccinations.contains(vaccination);
     }
 
-    public boolean getUnderTreatment(){
-        return underTreatment;
+    public boolean addTreatment(String treatment) {
+        return treatments.add(treatment);
     }
 
-    public String getNotes(){
-        return notes;
+    public boolean addNote(String note) {
+        return notes.add(note);
     }
+
 }
