@@ -1,42 +1,42 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class MedicalRecord {
 
-    private final List<String> notes = new ArrayList<>();
-    private final List<String> treatments = new ArrayList<>();
-    private final Set<String> vaccinations = new HashSet<>();
+    private boolean vaccinationUpToDate;
+    private boolean underTreatment;
+    private String notes;
 
-    public boolean addVaccination(String vaccination) {
-        return vaccinations.add(vaccination);
+    public MedicalRecord() {
+        this.vaccinationUpToDate = false;
+        this.underTreatment = false;
+        this.notes = "";
     }
 
-    public boolean hasVaccination(String vaccination) {
-        return vaccinations.contains(vaccination);
+    public boolean isVaccinationUpToDate() {
+        return vaccinationUpToDate;
     }
 
-    public boolean addTreatment(String treatment) {
-        return treatments.add(treatment);
+    public void setVaccinationUpToDate(boolean vaccinationUpToDate) {
+        this.vaccinationUpToDate = vaccinationUpToDate;
     }
 
-    public boolean addNote(String note) {
-        return notes.add(note);
+    public boolean isUnderTreatment() {
+        return underTreatment;
     }
 
-    public List<String> getTreatments() {
-        return new ArrayList<>(this.treatments);
+    public void setUnderTreatment(boolean underTreatment) {
+        this.underTreatment = underTreatment;
     }
 
-    public List<String> getNotes() {
-        return new ArrayList<>(this.notes);
+    public String getNotes() {
+        return notes;
     }
 
-    public Set<String> getVaccinations() {
-        return new HashSet<>(this.vaccinations);
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
+    public boolean isReadyForAdoption() {
+        return vaccinationUpToDate && !underTreatment;
+    }
 }

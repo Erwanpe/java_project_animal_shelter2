@@ -1,8 +1,10 @@
 package model;
 
+import contract.Identifiable;
+
 import java.util.Set;
 
-public class Volunteer {
+public class Volunteer implements Identifiable {
     private String idVol;
     private String nameVol;
     private boolean availability;
@@ -15,6 +17,11 @@ public class Volunteer {
         this.availability = availability;
         this.skills = skills;
         this.assignmentStatus = assignmentStatus;
+    }
+
+    @Override
+    public String getId() {
+        return idVol;
     }
 
     public String getIdVolunteer(){return idVol;}

@@ -1,6 +1,8 @@
 package model;
 
-public class CareTask {
+import contract.Identifiable;
+
+public class CareTask implements Identifiable {
     private String idTask;
     private String description;
     private String requiredSkill;
@@ -13,6 +15,11 @@ public class CareTask {
         this.requiredSkill = requiredSkill;
         this.assignedVolunteer = null;
         this.status = CareTaskStatus.UNASSIGNED;
+    }
+
+    @Override
+    public String getId() {
+        return idTask;
     }
 
     public String getIdTask() {return idTask;}
@@ -31,5 +38,9 @@ public class CareTask {
 
     protected void setStatus(CareTaskStatus status) {
         this.status = status;
+    }
+
+    public void markCompleted() {
+        setStatus(CareTaskStatus.COMPLETED);
     }
 }

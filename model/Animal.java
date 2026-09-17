@@ -1,9 +1,10 @@
 package model;
 
 import contract.Adoptable;
+import contract.Identifiable;
 import exception.ShelterException;
 
-public abstract class Animal implements Adoptable {
+public abstract class Animal implements Adoptable, Comparable<Animal>, Identifiable {
 
     private final String id;
     private final String name;
@@ -27,6 +28,10 @@ public abstract class Animal implements Adoptable {
         this.medicalRecord = new MedicalRecord();
     }
 
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
     public String getId() {
         return id;
     }
@@ -47,10 +52,6 @@ public abstract class Animal implements Adoptable {
         return status;
     }
 
-    public MedicalRecord getMedicalRecord() {
-        return medicalRecord;
-    }
-
     protected void setStatus(AnimalStatus status) {
         this.status = status;
     }
@@ -67,5 +68,10 @@ public abstract class Animal implements Adoptable {
             throw new ShelterException("Animal " + id + " is not eligible for adoption.");
         }
         setStatus(AnimalStatus.ADOPTED);
+    }
+
+    @Override
+    public int compareTo(Animal other) {
+        return this.id.compareTo(other.id);
     }
 }
