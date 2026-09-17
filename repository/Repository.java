@@ -40,7 +40,7 @@ public class Repository<T extends Identifiable> {
         return Collections.unmodifiableList(new ArrayList<>(storage.values()));
     }
 
-    // Nouvelle méthode générique de recherche
+    // Générique de recherche
     public List<T> filter(Predicate<T> condition) {
         List<T> result = new ArrayList<>();
         for (T item : storage.values()) {
@@ -50,4 +50,4 @@ public class Repository<T extends Identifiable> {
         }
         return result;
     }
-} 
+}
