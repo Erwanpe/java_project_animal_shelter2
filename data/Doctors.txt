@@ -2,4 +2,5 @@
 DOC1;Martin;Chirurgie
 DOC2;Dupont;Dermatologie
 DOC3;Lemoine;Vaccination
-DOC4;Bernard;Chirurgie
+DOC4;Bernard;Urgences
+DOC5;Richard;Médecine interne
