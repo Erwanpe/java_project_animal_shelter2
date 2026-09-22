@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Generic, type-safe storage for any domain object that has a stable,
@@ -61,14 +62,12 @@ public class Repository<T extends Identifiable> {
      * Generic predicate-based search: works for any T without the
      * Repository needing to know anything about the concrete subtype
      * (Cat, Dog, Doctor, Volunteer...). The caller supplies the condition.
+     * Source: storage.values(). Intermediate: filter(condition).
+     * Terminal: collect(toList). Empty case: no match -> empty list.
      */
     public List<T> filter(Predicate<T> condition) {
-        List<T> result = new ArrayList<>();
-        for (T item : storage.values()) {
-            if (condition.test(item)) {
-                result.add(item);
-            }
-        }
-        return result;
+        return storage.values().stream()
+                .filter(condition)
+                .collect(Collectors.toList());
     }
 }
