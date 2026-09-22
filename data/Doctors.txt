@@ -1,6 +1,5 @@
-# ID;Nom;Spécialisation
-DOC1;Martin;Chirurgie
-DOC2;Dupont;Dermatologie
-DOC3;Lemoine;Vaccination
-DOC4;Bernard;Urgences
-DOC5;Richard;Médecine interne
+DOC1;Smith;Surgery
+DOC2;Jones;Dermatology
+DOC3;Williams;Vaccination
+DOC4;Brown;General Medicine
+DOC5;Davis;Dentistry

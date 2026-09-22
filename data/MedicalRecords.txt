@@ -1,30 +1,15 @@
-A1;true;false;Healthy Labrador, all vaccines up to date
-A2;true;false;Routine check completed, ready for adoption
-A3;true;true;Under treatment for minor ear infection, vaccines ok
-A4;true;false;Healthy and active
-A5;true;false;Vaccinations complete but animal is too young
-A6;true;false;Healthy puppy, vaccines up to date for age
-A7;false;false;DHPP vaccination still required
-A8;false;true;Needs RAGE vaccine, currently treating skin issue
-A9;true;false;Adopted, annual checkup good
-A10;false;false;Adopted, missed DHPP booster
-A11;true;false;Healthy cat, vaccination complete
-A12;true;false;Just reached adoptable age, vaccines ok
-A13;true;true;Currently on antibiotics, fully vaccinated
-A14;true;false;Routine medical check completed
-A15;true;false;Vaccination complete but cat is too young
-A16;true;false;Healthy kitten
-A17;false;false;FVRCP vaccination required
-A18;false;true;FVRCP pending, treating mild eye infection
-A19;true;false;Adopted, healthy indoor cat
-A20;true;false;Adopted, perfectly healthy
-A21;true;false;Healthy bird, all required vaccinations completed
-A22;true;false;Reached 6 weeks, fully vaccinated
-A23;true;true;Recovering from wing injury, vaccines ok
-A24;true;false;Healthy and active
-A25;true;false;Vaccines up to date but bird is too young
-A26;true;false;Growing well, healthy
-A27;false;false;Rabies vaccination still required
-A28;false;true;Needs FVRCP, currently on dietary supplements
-A29;true;false;Adopted, routine care
-A30;true;false;Adopted, very healthy
+A1;true;false;Healthy Labrador awaiting final paperwork
+A2;false;false;DHPP vaccination missing
+A3;true;false;Healthy and awaiting final paperwork
+A4;true;false;Adopted healthy dog
+A5;false;true;Under treatment for broken leg
+A6;true;false;Adopted healthy cat
+A7;true;false;Healthy cat vaccination complete
+A8;true;false;Healthy and awaiting final paperwork
+A9;true;false;Adopted healthy cat
+A10;false;true;Under treatment for severe eye infection
+A11;true;false;Healthy bird all required vaccinations completed
+A12;false;false;Rabies vaccination still required
+A13;true;false;Healthy and awaiting final paperwork
+A14;true;false;Adopted healthy bird
+A15;false;true;Under treatment for feather disease
