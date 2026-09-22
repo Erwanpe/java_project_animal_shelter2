@@ -1,2 +1,15 @@
 V1;Alice;true;feeding,walking;AVAILABLE
 V2;Bob;false;medical;UNAVAILABLE
+V3;Claire;true;cleaning,administration;AVAILABLE
+V4;David;true;transport,socializing;AVAILABLE
+V5;Eva;false;grooming,training;UNAVAILABLE
+V6;Fabien;true;feeding,cleaning;AVAILABLE
+V7;Celine;true;walking,socializing;AVAILABLE
+V8;Hugo;false;medical,administration;UNAVAILABLE
+V9;Ines;true;transport,grooming;AVAILABLE
+V10;Jean;true;training,feeding,walking;AVAILABLE
+V11;Kenza;true;medical;AVAILABLE
+V12;Lucas;false;socializing,medical;UNAVAILABLE
+V13;Marie;true;administration,transport;AVAILABLE
+V14;Nathan;true;feeding,walking;AVAILABLE
+V15;Chloe;true;medical,cleaning;AVAILABLE
