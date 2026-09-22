@@ -59,6 +59,18 @@ public abstract class Animal implements Adoptable, Comparable<Animal>, Identifia
     @Override
     public abstract boolean isAdoptionEligible();
 
+    /**
+     * Shared eligibility base used by every subtype's isAdoptionEligible():
+     * an animal can only be considered for adoption if its lifecycle status
+     * is AVAILABLE *and* its medical record says it's ready (vaccinations
+     * up to date, not currently under treatment). This is what actually
+     * links AnimalStatus and MedicalRecord together - without it, the two
+     * pieces of state can silently disagree.
+     */
+    protected boolean isBaseEligible() {
+        return status == AnimalStatus.AVAILABLE && medicalRecord.isReadyForAdoption();
+    }
+
     @Override
     public void completeAdoption() {
         if (status == AnimalStatus.ADOPTED) {

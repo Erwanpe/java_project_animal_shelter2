@@ -6,7 +6,6 @@ import model.CareTaskStatus;
 import java.util.ArrayList;
 import java.util.List;
 
-import concurrent.CareTaskWorker;
 
 public class ConcurrentTaskProcessor {
 

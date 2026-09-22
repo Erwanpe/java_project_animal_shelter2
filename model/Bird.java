@@ -17,6 +17,6 @@ public class Bird extends Animal {
 
     @Override
     public boolean isAdoptionEligible() {
-        return getStatus() == AnimalStatus.AVAILABLE && getAge() >= MIN_ADOPTION_AGE_WEEKS;
+        return isBaseEligible() && getAge() >= MIN_ADOPTION_AGE_WEEKS;
     }
 }
