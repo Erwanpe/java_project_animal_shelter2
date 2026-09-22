@@ -232,10 +232,7 @@ public class ConsoleApp {
         }
 
         System.out.println("\nAnimals ready to be adopted:");
-        for (Animal a : eligible) {
-            System.out.println("- [" + a.getId() + "] " + a.getName()
-                    + " (" + a.getClass().getSimpleName() + ", " + a.getAge() + " weeks)");
-        }
+        printAnimals(eligible);
 
         System.out.print("\nEnter the ID of the animal to adopt (or blank to quit): ");
         String id = readLine();
@@ -290,27 +287,55 @@ public class ConsoleApp {
             case "8" -> {
                 Map<AnimalStatus, Long> byStatus = reportService.countByStatus(all);
                 System.out.println("\nBreakdown by status:");
-                byStatus.forEach((status, count) -> System.out.println("- " + status + ": " + count));
+                System.out.printf("%-14s %s%n", "Status", "Count");
+                System.out.println("-".repeat(24));
+                byStatus.forEach((status, count) -> System.out.printf("%-14s %d%n", status, count));
             }
             case "9" -> {
                 Map<String, Long> bySpecies = reportService.countBySpecies(all);
                 System.out.println("\nBreakdown by species:");
-                bySpecies.forEach((species, count) -> System.out.println("- " + species + ": " + count));
+                System.out.printf("%-14s %s%n", "Species", "Count");
+                System.out.println("-".repeat(24));
+                bySpecies.forEach((species, count) -> System.out.printf("%-14s %d%n", species, count));
             }
             default -> System.out.println("Invalid choice.");
         }
     }
 
+    /**
+     * Prints animals as an aligned table (id, name, species, age, arrival
+     * date, status) instead of one long free-text line per animal, so
+     * results stay readable as the list grows.
+     */
     private void printAnimals(List<Animal> animals) {
         if (animals.isEmpty()) {
             System.out.println("No results.");
             return;
         }
+
+        System.out.printf("%-6s %-14s %-8s %-5s %-10s %-14s%n",
+                "ID", "Name", "Species", "Age", "Arrived", "Status");
+        System.out.println("-".repeat(60));
+
         for (Animal a : animals) {
-            System.out.println("- [" + a.getId() + "] " + a.getName()
-                    + " (" + a.getClass().getSimpleName() + ", " + a.getAge() + " wks, arrived "
-                    + a.getArrivalDate() + ", status " + a.getStatus() + ")");
+            System.out.printf("%-6s %-14s %-8s %-5d %-10d %-14s%n",
+                    a.getId(),
+                    truncate(a.getName(), 14),
+                    a.getClass().getSimpleName(),
+                    a.getAge(),
+                    a.getArrivalDate(),
+                    a.getStatus());
         }
+
+        System.out.println("-".repeat(60));
+        System.out.println("Total: " + animals.size() + " animal(s)");
+    }
+
+    private String truncate(String value, int maxLength) {
+        if (value == null) {
+            return "";
+        }
+        return value.length() > maxLength ? value.substring(0, maxLength - 1) + "…" : value;
     }
 
     private void runConcurrencyMenu() {
