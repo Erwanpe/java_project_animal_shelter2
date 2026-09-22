@@ -3,13 +3,16 @@ A2;false;false;DHPP vaccination missing
 A3;true;false;Healthy and awaiting final paperwork
 A4;true;false;Adopted healthy dog
 A5;false;true;Under treatment for broken leg
-A6;true;false;Adopted healthy cat
-A7;true;false;Healthy cat vaccination complete
-A8;true;false;Healthy and awaiting final paperwork
-A9;true;false;Adopted healthy cat
-A10;false;true;Under treatment for severe eye infection
-A11;true;false;Healthy bird all required vaccinations completed
-A12;false;false;Rabies vaccination still required
-A13;true;false;Healthy and awaiting final paperwork
-A14;true;false;Adopted healthy bird
-A15;false;true;Under treatment for feather disease
+A6;true;false;Healthy dog ready for adoption
+A7;true;false;Adopted healthy cat
+A8;true;false;Healthy cat vaccination complete
+A9;true;false;Healthy and awaiting final paperwork
+A10;true;false;Adopted healthy cat
+A11;false;true;Under treatment for severe eye infection
+A12;true;false;Healthy cat ready for adoption
+A13;true;false;Healthy bird all required vaccinations completed
+A14;false;false;Rabies vaccination still required
+A15;true;false;Healthy and awaiting final paperwork
+A16;true;false;Adopted healthy bird
+A17;false;true;Under treatment for feather disease
+A18;true;false;Healthy bird ready for adoption
