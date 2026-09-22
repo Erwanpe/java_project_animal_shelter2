@@ -23,21 +23,26 @@ public class CareTask implements Identifiable {
         return idTask;
     }
 
-    public String getIdTask() {return idTask;}
+    public String getIdTask() {
+        return idTask;
+    }
 
-    public String getDescription() {return description;}
+    public String getDescription() {
+        return description;
+    }
 
-    public String getRequiredSkill() {return requiredSkill;}
+    public String getRequiredSkill() {
+        return requiredSkill;
+    }
 
-    public String getAssignedWorkerId() {return assignedWorkerId;}
+    public String getAssignedWorkerId() {
+        return assignedWorkerId;
+    }
 
-    public CareTaskStatus getStatus() {return status;}
+    public CareTaskStatus getStatus() {
+        return status;
+    }
 
-    /**
-     * Assigns this task to a worker (Volunteer or Doctor id).
-     * Self-protects the lifecycle invariant: a task can only move from
-     * UNASSIGNED to ASSIGNED, never re-assigned once already taken.
-     */
     public void assignTo(String workerId) {
         if (status != CareTaskStatus.UNASSIGNED) {
             throw new ShelterException("Task " + idTask + " is already " + status + "; cannot be re-assigned.");
@@ -46,13 +51,10 @@ public class CareTask implements Identifiable {
         this.status = CareTaskStatus.ASSIGNED;
     }
 
-    /**
-     * Marks this task complete. Self-protects the lifecycle invariant:
-     * only an ASSIGNED task can be completed.
-     */
     public void markCompleted() {
         if (status != CareTaskStatus.ASSIGNED) {
-            throw new ShelterException("Task " + idTask + " must be ASSIGNED before it can be completed (current: " + status + ").");
+            throw new ShelterException(
+                    "Task " + idTask + " must be ASSIGNED before it can be completed (current: " + status + ").");
         }
         this.status = CareTaskStatus.COMPLETED;
     }

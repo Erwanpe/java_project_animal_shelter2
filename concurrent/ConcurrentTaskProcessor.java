@@ -6,7 +6,6 @@ import model.CareTaskStatus;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ConcurrentTaskProcessor {
 
     private final TaskCompletionTracker tracker = new TaskCompletionTracker();
@@ -20,7 +19,8 @@ public class ConcurrentTaskProcessor {
      *
      * @param tasks               candidate tasks (only ASSIGNED ones are processed)
      * @param simulatedWorkMillis how long each worker "works" before finishing
-     * @param joinTimeoutMillis   how long the owner waits per worker before interrupting it
+     * @param joinTimeoutMillis   how long the owner waits per worker before
+     *                            interrupting it
      */
     public void processAssignedTasks(List<CareTask> tasks, long simulatedWorkMillis, long joinTimeoutMillis) {
         List<CareTask> assigned = new ArrayList<>();
@@ -34,8 +34,7 @@ public class ConcurrentTaskProcessor {
         for (CareTask task : assigned) {
             Thread worker = new Thread(
                     new CareTaskWorker(task, tracker, simulatedWorkMillis),
-                    "CareTaskWorker-" + task.getIdTask()
-            );
+                    "CareTaskWorker-" + task.getIdTask());
             workers.add(worker);
             worker.start();
         }
@@ -44,15 +43,10 @@ public class ConcurrentTaskProcessor {
             try {
                 worker.join(joinTimeoutMillis);
                 if (worker.isAlive()) {
-                    // The worker overran its allotted time: the owner takes
-                    // responsibility for stopping it rather than waiting
-                    // forever, then gives it one short grace period to unwind.
                     worker.interrupt();
                     worker.join(200);
                 }
             } catch (InterruptedException e) {
-                // The owner thread itself was interrupted while waiting;
-                // restore the flag and stop coordinating further joins.
                 Thread.currentThread().interrupt();
                 break;
             }

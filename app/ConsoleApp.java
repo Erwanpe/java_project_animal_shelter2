@@ -69,10 +69,6 @@ public class ConsoleApp {
         }
     }
 
-    // ---------------------------------------------------------------
-    // 1. Manager Flow
-    // ---------------------------------------------------------------
-
     private void runManagerMenu() {
         System.out.println("\n--- Task Assignment by the Manager ---");
         List<CareTask> unassigned = taskRepo.filter(t -> t.getStatus() == CareTaskStatus.UNASSIGNED);
@@ -90,7 +86,8 @@ public class ConsoleApp {
 
         System.out.print("\nID of the task to assign (or leave blank to cancel): ");
         String taskId = readLine();
-        if (taskId.isBlank()) return;
+        if (taskId.isBlank())
+            return;
 
         try {
             CareTask task = taskRepo.findById(taskId);
@@ -106,7 +103,8 @@ public class ConsoleApp {
                 String volId = readLine();
                 Volunteer v = volunteerRepo.findById(volId);
                 assignmentService.assignTaskToVolunteer(task, v);
-                System.out.println("Success: Task [" + task.getIdTask() + "] assigned to " + v.getNameVolunteer() + ".");
+                System.out
+                        .println("Success: Task [" + task.getIdTask() + "] assigned to " + v.getNameVolunteer() + ".");
             } else if ("2".equals(targetType)) {
                 System.out.print("Doctor ID: ");
                 String docId = readLine();
@@ -120,10 +118,6 @@ public class ConsoleApp {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-    // ---------------------------------------------------------------
-    // 2. Volunteer Flow
-    // ---------------------------------------------------------------
 
     private void runVolunteerMenu() {
         System.out.print("\nEnter your volunteer ID: ");
@@ -139,9 +133,8 @@ public class ConsoleApp {
 
         System.out.println("Hello " + volunteer.getNameVolunteer() + "!");
 
-        List<CareTask> myTasks = taskRepo.filter(t ->
-                volunteer.getId().equals(t.getAssignedWorkerId()) && t.getStatus() == CareTaskStatus.ASSIGNED
-        );
+        List<CareTask> myTasks = taskRepo.filter(
+                t -> volunteer.getId().equals(t.getAssignedWorkerId()) && t.getStatus() == CareTaskStatus.ASSIGNED);
 
         if (myTasks.isEmpty()) {
             System.out.println("You currently have no pending assigned tasks.");
@@ -155,7 +148,8 @@ public class ConsoleApp {
 
         System.out.print("\nEnter the ID of the completed task to close it (or blank): ");
         String taskId = readLine();
-        if (taskId.isBlank()) return;
+        if (taskId.isBlank())
+            return;
 
         try {
             CareTask task = taskRepo.findById(taskId);
@@ -169,10 +163,6 @@ public class ConsoleApp {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-    // ---------------------------------------------------------------
-    // 3. Doctor Flow
-    // ---------------------------------------------------------------
 
     private void runDoctorMenu() {
         System.out.print("\nEnter your doctor ID: ");
@@ -188,9 +178,8 @@ public class ConsoleApp {
 
         System.out.println("Hello Dr. " + doctor.getName() + " (" + doctor.getSpecialization() + ")");
 
-        List<CareTask> assignedTasks = taskRepo.filter(t ->
-                doctor.getId().equals(t.getAssignedWorkerId()) && t.getStatus() == CareTaskStatus.ASSIGNED
-        );
+        List<CareTask> assignedTasks = taskRepo.filter(
+                t -> doctor.getId().equals(t.getAssignedWorkerId()) && t.getStatus() == CareTaskStatus.ASSIGNED);
 
         if (!assignedTasks.isEmpty()) {
             System.out.println("\nAssigned surgeries / treatments:");
@@ -234,10 +223,6 @@ public class ConsoleApp {
         }
     }
 
-    // ---------------------------------------------------------------
-    // 4. Adoption Flow
-    // ---------------------------------------------------------------
-
     private void runAdoptionMenu() {
         List<Animal> eligible = animalRepo.filter(Animal::isAdoptionEligible);
 
@@ -254,7 +239,8 @@ public class ConsoleApp {
 
         System.out.print("\nEnter the ID of the animal to adopt (or blank to quit): ");
         String id = readLine();
-        if (id.isBlank()) return;
+        if (id.isBlank())
+            return;
 
         try {
             Animal a = animalRepo.findById(id);
@@ -264,10 +250,6 @@ public class ConsoleApp {
             System.out.println("Adoption rejected: " + e.getMessage());
         }
     }
-
-    // ---------------------------------------------------------------
-    // 5. Search & Sort Flow (Module 7 - Streams, Module 3/4 - Comparators)
-    // ---------------------------------------------------------------
 
     private void runSearchSortMenu() {
         List<Animal> all = animalRepo.getAll();
@@ -331,10 +313,6 @@ public class ConsoleApp {
         }
     }
 
-    // ---------------------------------------------------------------
-    // 6. Concurrency Flow (Module 9)
-    // ---------------------------------------------------------------
-
     private void runConcurrencyMenu() {
         List<CareTask> assigned = taskRepo.filter(t -> t.getStatus() == CareTaskStatus.ASSIGNED);
 
@@ -346,7 +324,8 @@ public class ConsoleApp {
         System.out.println("\n--- Concurrent Processing of Assigned Tasks ---");
         System.out.println("ASSIGNED tasks found: " + assigned.size());
         for (CareTask t : assigned) {
-            System.out.println("- [" + t.getIdTask() + "] " + t.getDescription() + " -> worker " + t.getAssignedWorkerId());
+            System.out.println(
+                    "- [" + t.getIdTask() + "] " + t.getDescription() + " -> worker " + t.getAssignedWorkerId());
         }
 
         System.out.println("\n1. Normal mode (every worker has time to finish)");
@@ -354,11 +333,6 @@ public class ConsoleApp {
         System.out.print("Choice: ");
         String mode = readLine();
 
-        // One finite thread per ASSIGNED task (bounded pool); each worker
-        // simulates the care work then completes its task. In mode 2, the
-        // owner's join timeout is shorter than the simulated work, so the
-        // workers get interrupted before they can finish - demonstrating the
-        // interruption path without ever corrupting a task's state.
         long simulatedWorkMillis = "2".equals(mode) ? 1500 : 300;
         long joinTimeoutMillis = "2".equals(mode) ? 200 : 5000;
 
@@ -371,9 +345,6 @@ public class ConsoleApp {
         System.out.println("- Interrupted tasks: " + tracker.getInterruptedTaskIds());
         System.out.println("- Failures: " + tracker.getFailedTaskIds());
 
-        // Post-join proof: every task is either COMPLETED or still ASSIGNED.
-        // No other state is possible -> no task lost, no corrupted state,
-        // regardless of how the threads were interleaved.
         boolean invariantHolds = true;
         for (CareTask t : assigned) {
             boolean ok = t.getStatus() == CareTaskStatus.COMPLETED || t.getStatus() == CareTaskStatus.ASSIGNED;
@@ -383,20 +354,16 @@ public class ConsoleApp {
             }
         }
         if (invariantHolds) {
-            System.out.println("Invariant verified: every task is COMPLETED or remains ASSIGNED (no loss, no corruption).");
+            System.out.println(
+                    "Invariant verified: every task is COMPLETED or remains ASSIGNED (no loss, no corruption).");
         }
     }
-
-    // ---------------------------------------------------------------
-    // Helpers & Data Initialization
-    // ---------------------------------------------------------------
 
     private String readLine() {
         return scanner.nextLine().trim();
     }
 
     private void loadAllData() {
-        // Robust data file resolution (handles upper/lower case variants).
         String animalFile = resolvePath("data/Animals.txt");
         String volunteerFile = resolvePath("data/Volunteers.txt");
         String medicalFile = resolvePath("data/MedicalRecords.txt");
@@ -406,7 +373,6 @@ public class ConsoleApp {
         new VolunteerFileLoader().loadFromFile(volunteerFile, volunteerRepo);
         new MedicalRecordFileLoader().loadFromFile(medicalFile, animalRepo);
 
-        // Load doctors from Doctors.txt
         new DoctorFileLoader().loadFromFile(doctorFile, doctorRepo);
 
         taskRepo.add(new CareTask("T1", "Feed the dogs", "feeding"));

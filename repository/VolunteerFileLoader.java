@@ -24,14 +24,13 @@ public class VolunteerFileLoader {
         }
 
         try (InputStream is = openStream(filePath);
-             Scanner scanner = new Scanner(is)) {
+                Scanner scanner = new Scanner(is)) {
 
             int lineNumber = 0;
             while (scanner.hasNextLine()) {
                 lineNumber++;
                 String line = scanner.nextLine().trim();
 
-                // Ignore les lignes vides et les commentaires
                 if (line.isEmpty() || line.startsWith("#")) {
                     continue;
                 }
@@ -49,7 +48,6 @@ public class VolunteerFileLoader {
     }
 
     private Volunteer parseLine(String line) {
-        // Découpage avec limitation pour éviter les pertes de champs vides
         String[] fields = line.split(";", -1);
         if (fields.length < 5) {
             throw new ShelterException("Malformed volunteer record (expected 5 fields): " + line);
@@ -115,6 +113,7 @@ public class VolunteerFileLoader {
             return is;
         }
 
-        throw new IOException("Cannot locate file at " + filePath + " (user.dir: " + System.getProperty("user.dir") + ")");
+        throw new IOException(
+                "Cannot locate file at " + filePath + " (user.dir: " + System.getProperty("user.dir") + ")");
     }
 }
